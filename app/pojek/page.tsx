@@ -17,7 +17,6 @@ export default function TodoList() {
       starred: true,
       dueTime: "13:20",
       description: "",
-      subtasks: [],
     },
     {
       id: 2,
@@ -27,12 +26,6 @@ export default function TodoList() {
       starred: true,
       dueTime: "13:40",
       description: "we'll reach grand master today",
-      subtasks: [
-        { id: 1, text: "reach silver", completed: true },
-        { id: 2, text: "reach gold", completed: true },
-        { id: 3, text: "reach platinum", completed: false },
-        { id: 4, text: "reach diamond", completed: false },
-      ],
     },
   ])
   const [newTask, setNewTask] = useState("")
@@ -58,7 +51,6 @@ export default function TodoList() {
           starred: false,
           dueTime: "14:00",
           description: "",
-          subtasks: [],
         },
       ])
       setNewTask("")
@@ -160,17 +152,9 @@ export default function TodoList() {
             </div>
 
             {/* Description and subtasks - only show when task is expanded */}
-            {expandedTaskId === task.id && task.subtasks.length > 0 && (
+            {expandedTaskId === task.id && task.description.length > 0 && (
               <div className="ml-6 mt-1">
                 {task.description && <div className="text-xs text-gray-600 mb-1">{task.description}</div>}
-                {task.subtasks.map((subtask) => (
-                  <div key={subtask.id} className="flex items-center space-x-1 text-xs">
-                    <div
-                      className={`w-3 h-3 rounded-full ${subtask.completed ? "bg-green-500" : "border border-gray-400"}`}
-                    ></div>
-                    <span className="text-gray-600">{subtask.text}</span>
-                  </div>
-                ))}
                 <div className="text-right text-xs text-gray-400 mt-1">written: 11.30 23/12/25</div>
               </div>
             )}
